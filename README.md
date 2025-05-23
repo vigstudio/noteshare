@@ -1,61 +1,82 @@
-# NoteShare - Ứng dụng Ghi chú & Chia sẻ
+# 📝 NoteShare - Ứng dụng Ghi chú & Chia sẻ An toàn
 
-NoteShare là một ứng dụng web cho phép người dùng tạo, lưu trữ và chia sẻ ghi chú một cách dễ dàng. Với giao diện thân thiện và các tính năng bảo mật, NoteShare là công cụ hoàn hảo để lưu trữ và chia sẻ thông tin.
+<div align="center">
 
-## Tính năng chính
+![NoteShare Banner](https://img.shields.io/badge/NoteShare-Your%20Secure%20Notes-1976d2?style=for-the-badge&logo=notepad&logoColor=white)
 
-### 1. Quản lý ghi chú
+[![GitHub license](https://img.shields.io/github/license/vigstudio/noteshare)](https://github.com/vigstudio/noteshare/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/vigstudio/noteshare)](https://github.com/vigstudio/noteshare/issues)
+[![GitHub stars](https://img.shields.io/github/stars/vigstudio/noteshare)](https://github.com/vigstudio/noteshare/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/vigstudio/noteshare)](https://github.com/vigstudio/noteshare/network)
 
-- Tạo ghi chú mới với tiêu đề và nội dung
-- Xem danh sách ghi chú với preview nội dung
-- Xem chi tiết ghi chú trong modal với số dòng
-- Xóa ghi chú không cần thiết
-- Hỗ trợ nhập nội dung dài với textarea full-page
+**🚀 Lưu trữ. Chia sẻ. Bảo mật. Đơn giản.**
 
-### 2. Đính kèm file
+[Demo](https://noteshare.demo.com) · [Báo cáo Bug](https://github.com/vigstudio/noteshare/issues) · [Yêu cầu tính năng](https://github.com/vigstudio/noteshare/issues)
 
-- Hỗ trợ đính kèm nhiều file cho mỗi ghi chú
-- Hiển thị icon và tên file gọn gàng
-- Tải xuống file đính kèm dễ dàng
-- Tự động xóa file vật lý khi xóa ghi chú
+</div>
 
-### 3. Bảo mật
+## ✨ Tổng quan
 
-- Yêu cầu mã bảo mật để truy cập
-- Mỗi mã bảo mật chỉ xem được ghi chú của riêng mình
-- Lưu mã bảo mật trong localStorage để tiện sử dụng
-- Có thể đổi mã bảo mật bất kỳ lúc nào
+NoteShare là giải pháp hoàn hảo cho việc lưu trữ và chia sẻ ghi chú an toàn. Với thiết kế hiện đại và tính năng bảo mật mạnh mẽ, NoteShare giúp bạn:
 
-### 4. Chia sẻ ghi chú
+- 🔒 Bảo vệ thông tin với mã bảo mật
+- 🌐 Chia sẻ ghi chú dễ dàng qua link hoặc QR code
+- 📎 Đính kèm và quản lý file thuận tiện
+- 💻 Trải nghiệm giao diện thân thiện trên mọi thiết bị
 
-- Mỗi ghi chú có một ID chia sẻ duy nhất
-- Tạo link chia sẻ và QR code nhanh chóng
-- Người nhận không cần mã bảo mật để xem ghi chú được chia sẻ
-- Giao diện xem ghi chú được chia sẻ thân thiện
+## 🎯 Tính năng nổi bật
 
-### 5. Giao diện người dùng
+### 📋 1. Quản lý ghi chú thông minh
 
-- Thiết kế hiện đại với Flat Design
-- Màu sắc chủ đạo xanh dương (#1976d2)
-- Font chữ Roboto dễ đọc
-- Responsive trên mọi thiết bị
-- Hiệu ứng loading khi thao tác
-- Trang lỗi 404, 500 được thiết kế đẹp mắt
+- ✍️ Tạo ghi chú với trình soạn thảo hiện đại
+- 👀 Xem trước nội dung với định dạng đẹp mắt
+- 📊 Hiển thị số dòng chuyên nghiệp
+- 🗑️ Quản lý và xóa ghi chú dễ dàng
+- ⌨️ Hỗ trợ soạn thảo nội dung dài
 
-## Cài đặt và Chạy
+### 📁 2. Đính kèm file tiện lợi
 
-### Yêu cầu hệ thống
+- 📤 Upload nhiều file cùng lúc
+- 🖼️ Hiển thị icon trực quan
+- ⬇️ Tải xuống nhanh chóng
+- 🧹 Tự động dọn dẹp file không cần thiết
 
-- Node.js (v14 trở lên)
-- NPM hoặc Yarn
-- SQLite3
+### 🔐 3. Bảo mật đa lớp
 
-### Các bước cài đặt
+- 🔑 Bảo vệ bằng mã truy cập riêng
+- 👤 Phân quyền xem nội dung
+- 💾 Lưu trữ mã bảo mật an toàn
+- 🔄 Thay đổi mã bảo mật linh hoạt
+
+### 🔗 4. Chia sẻ thông minh
+
+- 🆔 ID chia sẻ ngắn gọn, dễ nhớ
+- 📱 Tạo QR code tức thì
+- 👥 Chia sẻ không cần đăng nhập
+- 🎨 Giao diện chia sẻ chuyên nghiệp
+
+### 🎨 5. Giao diện người dùng hiện đại
+
+- 🎯 Thiết kế tối giản, dễ sử dụng
+- 🎨 Màu sắc hài hòa (#1976d2)
+- 📱 Tương thích mọi thiết bị
+- ⚡ Hiệu ứng mượt mà
+- ⚠️ Thông báo lỗi trực quan
+
+## 🚀 Cài đặt và Sử dụng
+
+### 📋 Yêu cầu hệ thống
+
+- ✅ Node.js (v14 trở lên)
+- ✅ NPM hoặc Yarn
+- ✅ SQLite3
+
+### 📥 Các bước cài đặt
 
 1. Clone repository:
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/vigstudio/noteshare.git
 cd noteshare
 ```
 
@@ -77,43 +98,58 @@ npm install
 node server.js
 ```
 
-Ứng dụng sẽ chạy tại http://localhost:4888
+🌐 Truy cập ứng dụng tại http://localhost:4888
 
-## Cấu trúc thư mục
+## 📂 Cấu trúc thư mục
 
 ```
 noteshare/
-├── public/             # Static files
-│   ├── index.html     # Trang chủ
-│   ├── share.html     # Trang xem ghi chú được chia sẻ
-│   ├── error.html     # Trang hiển thị lỗi
-│   ├── main.js        # JavaScript chính
-│   └── main.css       # CSS chính
-├── uploads/           # Thư mục chứa file đính kèm
-├── data/             # Thư mục chứa database
-├── server.js         # File server chính
-├── database.js       # Xử lý database
-└── README.md         # Tài liệu hướng dẫn
+├── 📁 public/          # Static files
+│   ├── 📄 index.html   # Trang chủ
+│   ├── 📄 share.html   # Trang chia sẻ
+│   ├── 📄 error.html   # Trang lỗi
+│   ├── 📄 main.js      # JavaScript
+│   └── 📄 main.css     # Styles
+├── 📁 uploads/         # File đính kèm
+├── 📁 data/           # Database
+├── 📄 server.js       # Server
+├── 📄 database.js     # Database
+└── 📄 README.md       # Hướng dẫn
 ```
 
-## API Endpoints
+## 🔌 API Endpoints
 
-### 1. Ghi chú
+### 📝 1. Quản lý ghi chú
 
-- `POST /api/save-note`: Tạo/cập nhật ghi chú
-- `GET /api/notes`: Lấy danh sách ghi chú
-- `GET /api/note/:id`: Lấy chi tiết ghi chú
-- `DELETE /api/note/:id`: Xóa ghi chú
+- `POST /api/save-note` - Tạo/cập nhật ghi chú
+- `GET /api/notes` - Lấy danh sách ghi chú
+- `GET /api/note/:id` - Xem chi tiết ghi chú
+- `DELETE /api/note/:id` - Xóa ghi chú
 
-### 2. Chia sẻ
+### 🔗 2. Chia sẻ
 
-- `GET /share/:shareId`: Xem ghi chú được chia sẻ (HTML)
-- `GET /api/share/:shareId`: Lấy dữ liệu ghi chú được chia sẻ (JSON)
+- `GET /share/:shareId` - Xem ghi chú (HTML)
+- `GET /api/share/:shareId` - Lấy dữ liệu (JSON)
 
-## Đóng góp
+## 🤝 Đóng góp
 
-Mọi đóng góp đều được hoan nghênh! Vui lòng tạo issue hoặc pull request nếu bạn muốn cải thiện ứng dụng.
+Chúng tôi luôn chào đón mọi đóng góp! Hãy tạo issue hoặc pull request để cải thiện NoteShare.
 
-## Giấy phép
+## 📜 Giấy phép
 
-[MIT License](LICENSE)
+[MIT License](LICENSE) - Tự do sử dụng và phát triển
+
+## 🌟 Ủng hộ dự án
+
+Nếu bạn thấy NoteShare hữu ích, hãy:
+
+- ⭐ Star repo này
+- 🐛 Báo cáo lỗi
+- 💡 Đề xuất tính năng mới
+- 🔀 Fork và tạo pull request
+
+---
+
+<div align="center">
+Made with ❤️ by <a href="https://github.com/vigstudio">VigStudio</a>
+</div>
