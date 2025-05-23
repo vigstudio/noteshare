@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng Chia sẻ Ghi chú</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <!-- Modal nhập mã bảo mật -->
+    <div class="modal fade" id="securityCodeModal" tabindex="-1" aria-labelledby="securityCodeModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#1976d2;color:#fff;">
+                    <h5 class="modal-title" id="securityCodeModalLabel">Nhập mã bảo mật</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="securityCodeInput" class="form-control" placeholder="Nhập mã bảo mật..." autofocus>
+                    <div id="securityCodeError" class="text-danger mt-2" style="display:none;">Mã bảo mật không hợp lệ!</div>
+                    <button id="securityCodeBtn" class="btn btn-primary w-100 mt-3">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mainApp" style="display:none;">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-sticky-note"></i> NoteShare
+            </a>
+            <button id="changeSecurityCodeBtn" class="btn btn-outline-light ms-auto" style="font-weight:500;">
+                <i class="fas fa-key"></i> Đổi mã bảo mật
+            </button>
+        </nav>
+        <div class="container-fluid main-content">
+            <div class="row">
+                <div class="col-lg-9 col-md-8 col-12 mb-3">
+                    <div class="note-container">
+                        <form id="noteForm">
+                            <div class="mb-3">
+                                <label for="noteName" class="form-label">Tiêu đề ghi chú</label>
+                                <input type="text" class="form-control" id="noteName" required placeholder="Nhập tiêu đề...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="noteText" class="form-label">Nội dung ghi chú</label>
+                                <textarea rows="10" class="form-control note-text" id="noteText" required placeholder="Nhập nội dung..."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Đính kèm file</label>
+                                <div class="paste-area" id="pasteArea" style="background:#e3f2fd;border:2px dashed #1976d2;">
+                                    <i class="fas fa-paste fa-2x mb-2" style="color:#1976d2;"></i>
+                                    <p style="color:#1976d2;">Nhấn Ctrl+V để dán ảnh từ clipboard hoặc kéo thả file vào đây</p>
+                                </div>
+                                <input type="file" class="form-control" id="files" multiple style="display: none;">
+                                <div id="fileList" class="file-preview"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mt-2">Lưu ghi chú</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-12 mb-3">
+                    <div class="note-list-container">
+                        <h4 class="mb-3" style="color:#1976d2;font-weight:700;">Danh sách ghi chú</h4>
+                        <div id="notesList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal xem nội dung ghi chú -->
+        <div class="modal fade" id="viewNoteModal" tabindex="-1" aria-labelledby="viewNoteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header" style="background:#1976d2;color:#fff;">
+                        <h5 class="modal-title" id="viewNoteModalLabel">Xem ghi chú</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h4 id="modalNoteTitle" style="color:#1976d2;font-weight:700;"></h4>
+                        <div id="modalNoteContent" class="modal-note-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loadingOverlay" style="display:none;position:fixed;z-index:2000;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.7);align-items:center;justify-content:center;">
+        <div class="spinner-border text-primary" style="width:3rem;height:3rem;" role="status"></div>
+        <div style="margin-top:12px;font-size:1.1rem;color:#1976d2;font-weight:500;">Đang lưu ghi chú...</div>
+    </div>
+    <!-- Modal chia sẻ ghi chú -->
+    <div class="modal fade" id="shareNoteModal" tabindex="-1" aria-labelledby="shareNoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#1976d2;color:#fff;">
+                    <h5 class="modal-title" id="shareNoteModalLabel">Chia sẻ ghi chú</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="shareNoteLink" style="word-break:break-all;font-size:1.1rem;margin-bottom:12px;"></div>
+                    <div id="shareNoteQR"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

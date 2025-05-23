@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghi chú được chia sẻ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #1976d2;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .note-title {
+            color: #1976d2;
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: 24px;
+        }
+
+        .note-content {
+            white-space: pre-wrap;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: monospace;
+            position: relative;
+            overflow-x: auto;
+            counter-reset: line;
+            display: flex;
+        }
+
+        .line-numbers {
+            counter-reset: linenumber;
+            width: 50px;
+            min-width: 50px;
+            padding: 15px 5px;
+            border-right: 1px solid #ddd;
+            color: #999;
+            text-align: right;
+            font-family: monospace;
+            user-select: none;
+        }
+
+        .line-numbers span {
+            counter-increment: linenumber;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .line-numbers span::before {
+            content: counter(linenumber);
+            display: block;
+        }
+
+        .code-content {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+
+        .attachment-section {
+            margin-top: 20px;
+        }
+
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .attachment-icon {
+            color: #1976d2;
+            margin-right: 10px;
+        }
+
+        .attachment-name {
+            flex-grow: 1;
+            margin-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .attachment-download {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .attachment-download i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1><i class="far fa-sticky-note"></i> NoteShare</h1>
+    </div>
+
+    <div class="container">
+        <h2 class="note-title" id="note-title">Đang tải...</h2>
+        <div class="note-content" id="note-content">
+            <div class="line-numbers" id="line-numbers"></div>
+            <div class="code-content" id="code-content">Đang tải nội dung ghi chú...</div>
+        </div>
+        <div class="attachment-section" id="note-attachments">
+            <!-- Đây là nơi các file đính kèm sẽ được hiển thị -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const shareId = window.location.pathname.split('/').pop();
+            fetch(`/api/share/${shareId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('note-title').textContent = data.title || 'Không có tiêu đề';
+
+                    // Xử lý nội dung với số dòng
+                    const content = data.content || 'Không có nội dung';
+                    const lines = content.split('\n');
+                    const lineNumbersContainer = document.getElementById('line-numbers');
+                    const codeContentContainer = document.getElementById('code-content');
+
+                    // Xóa nội dung cũ
+                    lineNumbersContainer.innerHTML = '';
+                    codeContentContainer.textContent = '';
+
+                    // Thêm số dòng và nội dung
+                    lines.forEach((line, index) => {
+                        // Thêm số dòng
+                        const lineNumber = document.createElement('span');
+                        lineNumbersContainer.appendChild(lineNumber);
+
+                        // Thêm nội dung dòng
+                        codeContentContainer.textContent += (index > 0 ? '\n' : '') + line;
+                    });
+
+                    const attachmentsContainer = document.getElementById('note-attachments');
+                    attachmentsContainer.innerHTML = '';
+
+                    if (data.attachments && data.attachments.length > 0) {
+                        const attachmentsTitle = document.createElement('h4');
+                        attachmentsTitle.textContent = 'File đính kèm:';
+                        attachmentsContainer.appendChild(attachmentsTitle);
+
+                        data.attachments.forEach(attachment => {
+                            const attachmentItem = document.createElement('div');
+                            attachmentItem.className = 'attachment-item';
+
+                            const icon = document.createElement('div');
+                            icon.className = 'attachment-icon';
+                            icon.innerHTML = '<i class="fas fa-file"></i>';
+
+                            const name = document.createElement('div');
+                            name.className = 'attachment-name';
+                            name.textContent = attachment.originalName;
+                            name.title = attachment.originalName;
+
+                            const downloadLink = document.createElement('a');
+                            downloadLink.className = 'attachment-download';
+                            downloadLink.href = `/uploads/${attachment.filename}`;
+                            downloadLink.target = '_blank';
+                            downloadLink.innerHTML = '<i class="fas fa-download"></i> Tải xuống';
+                            downloadLink.download = attachment.originalName;
+
+                            attachmentItem.appendChild(icon);
+                            attachmentItem.appendChild(name);
+                            attachmentItem.appendChild(downloadLink);
+                            attachmentsContainer.appendChild(attachmentItem);
+                        });
+                    } else {
+                        attachmentsContainer.innerHTML = '<p>Không có file đính kèm</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải ghi chú:', error);
+                    document.getElementById('note-title').textContent = 'Lỗi';
+
+                    // Xóa số dòng
+                    document.getElementById('line-numbers').innerHTML = '';
+
+                    // Hiển thị thông báo lỗi
+                    document.getElementById('code-content').textContent = 'Không thể tải nội dung ghi chú. Vui lòng thử lại sau.';
+
+                    document.getElementById('note-attachments').innerHTML = '';
+                });
+        });
+    </script>
+</body>
+
+</html>
