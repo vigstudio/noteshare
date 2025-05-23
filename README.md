@@ -11,7 +11,7 @@
 
 **🚀 Lưu trữ. Chia sẻ. Bảo mật. Đơn giản.**
 
-[Demo](https://noteshare.demo.com) · [Báo cáo Bug](https://github.com/vigstudio/noteshare/issues) · [Yêu cầu tính năng](https://github.com/vigstudio/noteshare/issues)
+[Demo](https://noteshare.nghiane.com) · [Báo cáo Bug](https://github.com/vigstudio/noteshare/issues) · [Yêu cầu tính năng](https://github.com/vigstudio/noteshare/issues)
 
 </div>
 

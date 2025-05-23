@@ -9,6 +9,62 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+    <style>
+        .attachment-area {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            background: #f8f9fa;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .attachment-icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #fff;
+            border-radius: 6px;
+            margin: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .attachment-icon i {
+            color: #1976d2;
+            font-size: 1.2em;
+            width: 20px;
+            text-align: center;
+        }
+
+        .attachment-icon .file-name {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .attachment-icon .btn-download {
+            padding: 4px 8px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .attachment-placeholder {
+            color: #666;
+            text-align: center;
+        }
+
+        .attachment-placeholder i {
+            font-size: 2em;
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,9 +107,11 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Đính kèm file</label>
-                                <div class="paste-area" id="pasteArea" style="background:#e3f2fd;border:2px dashed #1976d2;">
-                                    <i class="fas fa-paste fa-2x mb-2" style="color:#1976d2;"></i>
-                                    <p style="color:#1976d2;">Nhấn Ctrl+V để dán ảnh từ clipboard hoặc kéo thả file vào đây</p>
+                                <div class="attachment-area" id="pasteArea">
+                                    <div class="attachment-icon">
+                                        <i class="fas fa-paste fa-2x mb-2" style="color:#1976d2;"></i>
+                                        <p class="attachment-placeholder">Nhấn Ctrl+V để dán ảnh từ clipboard hoặc kéo thả file vào đây</p>
+                                    </div>
                                 </div>
                                 <input type="file" class="form-control" id="files" multiple style="display: none;">
                                 <div id="fileList" class="file-preview"></div>
